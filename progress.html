@@ -9,7 +9,7 @@
 <meta name="description" content="Alex's gym progress — strength and body composition over time">
 <title>Gains · Alex</title>
 <link rel="manifest" href="manifest.json">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>
 <style>
 :root {
   --bg:      #0a0a0f;
@@ -585,6 +585,13 @@ const YSC = {
 // ═══════════════════════════════════════════════════
 // CHART INSTANCES
 // ═══════════════════════════════════════════════════
+if (typeof Chart === 'undefined') {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('error-box').style.display = '';
+  document.getElementById('error-detail').textContent = 'Chart.js failed to load. Check your internet connection and try refreshing.';
+  throw new Error('Chart.js not loaded');
+}
+
 const bwChart = new Chart(document.getElementById('bwChart').getContext('2d'), {
   type: 'line',
   data: { labels: projLabels, datasets: [] },
