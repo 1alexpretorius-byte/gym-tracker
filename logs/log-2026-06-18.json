@@ -1,0 +1,103 @@
+{
+  "date": "2026-06-18",
+  "session_type": "Pull A",
+  "week": 1,
+  "phase": "Ramp-up",
+  "exercises": [
+    {
+      "name": "Lat Pulldown",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 55,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 60,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 60,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Seated Cable Row",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 45,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 50,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 50,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "name": "Face Pull",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 24,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_kg": 18,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 18,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "name": "DB Bicep Curl",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 12,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 9,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 8,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Hammer Curl",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 8,
+          "reps": 13
+        },
+        {
+          "set": 2,
+          "weight_kg": 8,
+          "reps": 12
+        }
+      ]
+    }
+  ]
+}
