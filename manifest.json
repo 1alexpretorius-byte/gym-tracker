@@ -1,0 +1,39 @@
+{
+  "name": "Alex's Gym Tracker",
+  "short_name": "Gym",
+  "description": "Workout tracker and progress dashboard",
+  "start_url": "/gym-tracker/",
+  "scope": "/gym-tracker/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0a0a0f",
+  "background_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Workout",
+      "short_name": "Workout",
+      "url": "/gym-tracker/",
+      "description": "Open today's training session"
+    },
+    {
+      "name": "Progress Dashboard",
+      "short_name": "Progress",
+      "url": "/gym-tracker/progress.html",
+      "description": "View strength and body composition progress"
+    }
+  ]
+}
