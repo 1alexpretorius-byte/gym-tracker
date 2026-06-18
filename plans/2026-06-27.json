@@ -1,0 +1,92 @@
+{
+  "date": "2026-06-27",
+  "session_type": "Push B",
+  "week": 2,
+  "phase": "Ramp-up",
+  "exercises": [
+    {
+      "name": "Seated DB Shoulder Press",
+      "equipment": "dumbbell",
+      "sets": 4,
+      "target_reps": [10, 10, 10, 10],
+      "target_weight_kg": 12,
+      "rest_seconds": 150,
+      "notes": "Primary compound for Push B. 12kg from last week — if 4×10 lands clean, step to 14kg next week.",
+      "previous": {
+        "date": "2026-06-20",
+        "sets": [
+          {"weight_kg": 10, "reps": 12},
+          {"weight_kg": 10, "reps": 12},
+          {"weight_kg": 10, "reps": 12}
+        ]
+      }
+    },
+    {
+      "name": "Incline DB Press",
+      "equipment": "dumbbell",
+      "sets": 3,
+      "target_reps": [10, 10, 10],
+      "target_weight_kg": 14,
+      "rest_seconds": 120,
+      "notes": "Consistent 14kg — build 3 clean sets before progressing. Upper chest focus.",
+      "previous": {
+        "date": "2026-06-20",
+        "sets": [
+          {"weight_kg": 20, "reps": 8},
+          {"weight_kg": 16, "reps": 8},
+          {"weight_kg": 14, "reps": 11}
+        ]
+      }
+    },
+    {
+      "name": "Lateral Raises",
+      "equipment": "dumbbell",
+      "sets": 3,
+      "target_reps": [15, 15, 15],
+      "target_weight_kg": 6,
+      "rest_seconds": 75,
+      "notes": "Up from 5kg. Lead with elbows, stop at shoulder height. Check form in mirror.",
+      "previous": {
+        "date": "2026-06-20",
+        "sets": [
+          {"weight_kg": 5, "reps": 15},
+          {"weight_kg": 5, "reps": 15},
+          {"weight_kg": 5, "reps": 15}
+        ]
+      }
+    },
+    {
+      "name": "Overhead Triceps Extension",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [12, 12, 12],
+      "target_weight_kg": 24,
+      "rest_seconds": 90,
+      "notes": "Full stretch at bottom. 24kg is the working weight — lock it in here before going heavier.",
+      "previous": {
+        "date": "2026-06-20",
+        "sets": [
+          {"weight_kg": 30, "reps": 8},
+          {"weight_kg": 22, "reps": 12}
+        ]
+      }
+    },
+    {
+      "name": "Triceps Pushdown",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [12, 12, 12],
+      "target_weight_kg": 36,
+      "rest_seconds": 75,
+      "notes": "Elbows locked at sides. Full extension at bottom. If you hit 3×12 clean, step to 38kg next cycle.",
+      "previous": {
+        "date": "2026-06-20",
+        "sets": [
+          {"weight_kg": 36, "reps": 12},
+          {"weight_kg": 36, "reps": 12},
+          {"weight_kg": 36, "reps": 10}
+        ]
+      }
+    }
+  ]
+}
