@@ -3,6 +3,8 @@
   "session_type": "Pull A",
   "week": 1,
   "phase": "Ramp-up",
+  "body_weight_kg": 73,
+  "session_rpe": 7,
   "exercises": [
     {
       "name": "Lat Pulldown",
