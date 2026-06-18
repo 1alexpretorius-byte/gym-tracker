@@ -44,7 +44,59 @@ You should now see `ANTHROPIC_API_KEY` listed under Repository secrets.
 
 ---
 
-## Step 3 — Test it with a manual run
+## Step 3 — Create the workflow file in GitHub
+
+The workflow file cannot be pushed via git with the current token scope, so create it directly in GitHub's web editor:
+
+1. Go to **https://github.com/1alexpretorius-byte/gym-tracker/new/main**
+2. In the filename box at the top, type exactly: `.github/workflows/generate-plans.yml`
+   (GitHub will auto-create the folders)
+3. Paste the following content into the editor:
+
+```yaml
+name: Generate Weekly Training Plans
+
+on:
+  schedule:
+    - cron: '0 16 * * 0'   # Every Sunday at 16:00 UTC = 18:00 SAST
+  workflow_dispatch:         # Also triggerable manually from GitHub UI
+
+permissions:
+  contents: write            # Required to commit plan files back to the repo
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate training plans
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node .github/scripts/generate-plans.js
+
+      - name: Commit and push new plans
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add plans/
+          git diff --staged --quiet \
+            && echo "No new plans to commit — plans already exist for next week." \
+            || git commit -m "chore: auto-generate training plans $(date +%Y-%m-%d)" && git push
+```
+
+4. Scroll down, set commit message to `chore: add GitHub Actions workflow for plan generation`
+5. Click **Commit new file**
+
+---
+
+## Step 4 — Test it with a manual run
 
 1. Go to **https://github.com/1alexpretorius-byte/gym-tracker/actions**
 2. Click **Generate Weekly Training Plans** in the left sidebar
