@@ -359,6 +359,24 @@ footer { font-size: 11px; color: var(--dim); margin-top: 24px; line-height: 1.9;
       </div>
     </div>
 
+    <!-- RPE -->
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Session Fatigue (RPE)</div>
+          <div class="card-sub">1 = easy · 7–8 = hard · 9–10 = max effort</div>
+        </div>
+      </div>
+      <div class="cbox" role="img" aria-label="Session RPE over time — higher values indicate harder sessions.">
+        <canvas id="rpeChart"></canvas>
+      </div>
+      <div class="leg" aria-hidden="true">
+        <div class="li"><div class="ll" style="background:#22c55e"></div><span>Easy (1–6)</span></div>
+        <div class="li"><div class="ll" style="background:#f59e0b"></div><span>Hard (7–8)</span></div>
+        <div class="li"><div class="ll" style="background:#ef4444"></div><span>Max (9–10)</span></div>
+      </div>
+    </div>
+
     <!-- Session Log -->
     <div class="card">
       <div class="card-title" style="margin-bottom:14px">Session Log</div>
@@ -525,6 +543,7 @@ function normalise(log) {
     week: log.week || 1,
     phase: log.phase || '',
     bodyWeight: log.body_weight_kg || null,
+    rpe: log.session_rpe || null,
     exercises
   };
 }
@@ -631,6 +650,23 @@ const strChart = new Chart(document.getElementById('strChart').getContext('2d'),
     scales: {
       x: { ...XSC },
       y: { ...YSC, ticks: { ...YSC.ticks, callback: v => `${v} kg` } }
+    }
+  }
+});
+
+const rpeChart = new Chart(document.getElementById('rpeChart').getContext('2d'), {
+  type: 'line',
+  data: { labels: [], datasets: [] },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    animation: { duration: 350 },
+    plugins: {
+      legend: { display: false },
+      tooltip: { ...TTP, callbacks: { label: c => ` RPE ${c.parsed.y}/10` } }
+    },
+    scales: {
+      x: { ...XSC },
+      y: { ...YSC, min: 0, max: 10, ticks: { ...YSC.ticks, stepSize: 2, callback: v => v > 0 ? v : '' } }
     }
   }
 });
@@ -866,12 +902,36 @@ function renderTable() {
   }
 }
 
+function renderRPE() {
+  const withRPE = sessions.filter(s => s.rpe != null);
+  const labels = withRPE.map(s => `${fmtD(s.date)} ${s.type}`);
+  const vals   = withRPE.map(s => s.rpe);
+  const ptColors = vals.map(v => v >= 9 ? '#ef4444' : v >= 7 ? '#f59e0b' : '#22c55e');
+
+  rpeChart.data.labels = labels;
+  rpeChart.data.datasets = withRPE.length ? [{
+    label: 'RPE',
+    data: vals,
+    borderColor: '#64748b',
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    pointRadius: 9,
+    pointHoverRadius: 11,
+    pointBackgroundColor: ptColors,
+    pointBorderColor: ptColors,
+    tension: 0.3,
+    spanGaps: false,
+  }] : [];
+  rpeChart.update();
+}
+
 function renderAll() {
   renderStats();
   renderBW();
   renderExChips();
   renderStr();
   renderVol();
+  renderRPE();
   renderTable();
 }
 

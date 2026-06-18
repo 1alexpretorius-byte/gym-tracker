@@ -145,6 +145,17 @@
     .sum-name { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
     .sum-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .tag { background: var(--surface2); border-radius: 6px; padding: 3px 9px; font-size: 12px; font-weight: 600; }
+
+    /* ── SESSION NOTES ── */
+    .notes-card { background: var(--surface); border-radius: var(--r); padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+    .notes-sec-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--dim); margin-bottom: 7px; }
+    .notes-inp { width: 100%; background: var(--surface2); border: 2px solid var(--border); border-radius: var(--r-sm); color: var(--text); font-size: 28px; font-weight: 700; text-align: center; padding: 10px 6px; -webkit-appearance: none; transition: border-color .2s; }
+    .notes-inp:focus { outline: none; border-color: var(--primary); }
+    .notes-inp::placeholder { color: var(--surface3); }
+    .rpe-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 8px; }
+    .rpe-btn { background: var(--surface2); border: 2px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 14px; font-weight: 700; padding: 11px 2px; cursor: pointer; transition: all .12s; -webkit-tap-highlight-color: transparent; }
+    .rpe-btn:active { transform: scale(0.9); }
+    .rpe-scale { display: flex; justify-content: space-between; font-size: 10px; color: var(--dim); padding: 4px 2px 0; }
   </style>
 </head>
 <body>
@@ -251,6 +262,20 @@
     </div>
   </div>
   <div class="summary-card" id="sum-body"></div>
+
+  <div class="notes-card">
+    <div>
+      <div class="notes-sec-lbl">Body Weight</div>
+      <input type="number" class="notes-inp" id="inp-bw" inputmode="decimal" step="0.1" min="30" max="300" placeholder="—">
+      <div style="font-size:11px;color:var(--dim);text-align:center;margin-top:4px">kg</div>
+    </div>
+    <div>
+      <div class="notes-sec-lbl">Session RPE <span id="rpe-val-lbl" style="color:var(--text);font-size:12px;font-weight:700;margin-left:2px"></span></div>
+      <div class="rpe-grid" id="rpe-grid"></div>
+      <div class="rpe-scale"><span>Easy</span><span>Moderate</span><span>Max effort</span></div>
+    </div>
+  </div>
+
   <button class="btn btn-primary" id="save-log-btn" onclick="saveLog()">💾 Save Log</button>
   <button class="btn btn-outline" onclick="location.reload()">Done</button>
 </div>
@@ -270,6 +295,7 @@ let S = {
   restInterval: null,
   restTotal: 0,
   restLeft: 0,
+  rpe: null,
 };
 
 /* ──────── UTILS ──────── */
@@ -484,12 +510,34 @@ function nextExercise() {
   else { S.exIdx=next; showExercise(); }
 }
 
+function renderRPEGrid(selected) {
+  const RPE_COLORS = { low: '#22c55e', mid: '#f59e0b', high: '#ef4444' };
+  document.getElementById('rpe-grid').innerHTML = Array.from({length:10},(_,i)=>{
+    const n = i + 1;
+    const c = n <= 6 ? RPE_COLORS.low : n <= 8 ? RPE_COLORS.mid : RPE_COLORS.high;
+    const on = n === selected;
+    return `<button class="rpe-btn" style="${on?`background:${c};border-color:${c};color:#fff`:''}" onclick="selectRPE(${n})">${n}</button>`;
+  }).join('');
+  const lbl = document.getElementById('rpe-val-lbl');
+  lbl.textContent = selected ? `${selected}/10` : '';
+}
+
+function selectRPE(n) {
+  S.rpe = n;
+  renderRPEGrid(n);
+}
+
 function showComplete() {
   const vol = S.logged.reduce((s,l)=>s+l.weight_kg*l.reps,0);
   document.getElementById('st-ex').textContent = S.done.size;
   document.getElementById('st-sets').textContent = S.logged.length;
   document.getElementById('st-vol').textContent = Math.round(vol).toLocaleString();
   document.getElementById('complete-sub').textContent = `${plan.session_type} · ${fmtDate(plan.date)}`;
+
+  const lastBW = localStorage.getItem('last_body_weight');
+  if (lastBW) document.getElementById('inp-bw').value = lastBW;
+  S.rpe = null;
+  renderRPEGrid(null);
 
   document.getElementById('sum-body').innerHTML = plan.exercises.map((ex,i)=>{
     const lg = loggedFor(i);
@@ -514,9 +562,13 @@ async function saveLog() {
       if (!byEx[s.exIdx]) byEx[s.exIdx] = { name: plan.exercises[s.exIdx]?.name||'Unknown', sets: [] };
       byEx[s.exIdx].sets.push({ set: s.set+1, weight_kg: s.weight_kg, reps: s.reps });
     });
+    const bwVal = parseFloat(document.getElementById('inp-bw').value) || null;
+    if (bwVal) localStorage.setItem('last_body_weight', bwVal);
     const logData = {
       date: plan.date, session_type: plan.session_type,
       week: plan.week, phase: plan.phase,
+      body_weight_kg: bwVal,
+      session_rpe: S.rpe,
       exercises: Object.values(byEx)
     };
     const path = 'logs/log-'+plan.date+'.json';
