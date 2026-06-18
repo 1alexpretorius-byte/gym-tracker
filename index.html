@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gym Tracker">
   <meta name="theme-color" content="#0a0a0f">
   <title>Gym Tracker</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <style>
     :root {
       --bg: #0a0a0f;
@@ -33,6 +36,14 @@
       overflow-x: hidden;
     }
 
+    /* ── BOTTOM NAV ── */
+    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--surface); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+    .nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: var(--dim); font-size: 10px; font-weight: 600; letter-spacing: .04em; -webkit-tap-highlight-color: transparent; padding: 10px 0 8px; transition: color .12s; }
+    .nav-tab svg { width: 20px; height: 20px; }
+    .nav-tab.nav-active-t { color: var(--primary); }
+    .nav-tab.nav-active-p { color: var(--success); }
+    .nav-tab.nav-active-s { color: var(--warning); }
+
     /* ── SCREENS ── */
     .screen { display: none; min-height: 100dvh; flex-direction: column; }
     .screen.active { display: flex; }
@@ -43,7 +54,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── NO PLAN ── */
-    #s-no-plan { align-items: center; justify-content: center; text-align: center; padding: 40px 28px; gap: 14px; }
+    #s-no-plan { align-items: center; justify-content: center; text-align: center; padding: 40px 28px 110px; gap: 14px; }
     .big-emoji { font-size: 60px; }
     .next-card { background: var(--surface); border-radius: var(--r); padding: 14px 18px; width: 100%; max-width: 300px; text-align: left; font-size: 14px; color: var(--muted); }
     .next-card strong { color: var(--text); display: block; margin-bottom: 4px; }
@@ -56,7 +67,7 @@
     .pfill { height: 100%; background: var(--primary); border-radius: 99px; transition: width .4s ease; }
 
     /* ── OVERVIEW ── */
-    #s-overview { padding-bottom: 90px; }
+    #s-overview { padding-bottom: 160px; }
     .sec-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); padding: 18px 18px 8px; }
     .ex-item { display: flex; align-items: center; padding: 14px 18px; background: var(--surface); border-bottom: 1px solid var(--border); gap: 14px; cursor: pointer; }
     .ex-item:active { background: var(--surface2); }
@@ -68,7 +79,7 @@
     .ex-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
     .ex-check.done { background: var(--success); border-color: var(--success); color: #fff; }
 
-    .pin-bottom { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; padding: 14px 18px 28px; background: linear-gradient(to top, var(--bg) 75%, transparent); }
+    .pin-bottom { position: fixed; bottom: calc(60px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; padding: 14px 18px; background: linear-gradient(to top, var(--bg) 75%, transparent); }
 
     /* ── BUTTONS ── */
     .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px 20px; border: none; border-radius: var(--r); font-size: 16px; font-weight: 600; cursor: pointer; transition: opacity .15s, transform .1s; }
@@ -79,7 +90,7 @@
     .btn-sm { padding: 10px 16px; font-size: 14px; border-radius: var(--r-sm); }
 
     /* ── EXERCISE SCREEN ── */
-    #s-exercise { padding-bottom: 110px; }
+    #s-exercise { padding-bottom: 170px; }
     .back-btn { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 4px 8px 4px 0; }
     .skip-btn { background: none; border: none; color: var(--dim); font-size: 13px; cursor: pointer; }
 
@@ -130,7 +141,7 @@
     .inp-unit { font-size: 12px; color: var(--dim); text-align: center; margin-top: 4px; }
 
     /* ── COMPLETE ── */
-    #s-complete { padding: 22px 18px 48px; gap: 16px; }
+    #s-complete { padding: 22px 18px 110px; gap: 16px; }
     .hero { background: var(--surface); border-radius: var(--r); padding: 28px 22px; text-align: center; }
     .hero-emoji { font-size: 44px; margin-bottom: 10px; }
     .hero-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
@@ -601,5 +612,20 @@ document.addEventListener('keydown', e=>{
 
 init();
 </script>
+
+<nav class="bottom-nav" aria-label="App navigation">
+  <a href="index.html" class="nav-tab nav-active-t">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="3" y1="10.5" x2="3" y2="13.5"/><line x1="21" y1="10.5" x2="21" y2="13.5"/></svg>
+    <span>Tracker</span>
+  </a>
+  <a href="progress.html" class="nav-tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="14" width="4" height="7" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="5" width="4" height="16" rx="1"/></svg>
+    <span>Progress</span>
+  </a>
+  <a href="settings.html" class="nav-tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="8" cy="6" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+    <span>Settings</span>
+  </a>
+</nav>
 </body>
 </html>

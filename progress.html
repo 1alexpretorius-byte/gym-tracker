@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#0a0a0f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Gym Progress">
+<meta name="apple-mobile-web-app-title" content="Gym Tracker">
 <meta name="description" content="Alex's gym progress — strength and body composition over time">
 <title>Gains · Alex</title>
-<link rel="manifest" href="manifest-progress.json">
-<link rel="apple-touch-icon" href="icon-progress-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>
 <style>
 :root {
@@ -42,8 +42,16 @@ a { color: var(--primary); }
 main {
   max-width: 940px;
   margin: 0 auto;
-  padding: 20px 16px 60px;
+  padding: 20px 16px 100px;
 }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 940px; background: var(--card); border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: var(--dim); font-size: 10px; font-weight: 600; letter-spacing: .04em; -webkit-tap-highlight-color: transparent; padding: 10px 0 8px; transition: color .12s; }
+.nav-tab svg { width: 20px; height: 20px; }
+.nav-tab.nav-active-t { color: var(--primary); }
+.nav-tab.nav-active-p { color: var(--green); }
+.nav-tab.nav-active-s { color: var(--warn); }
 
 /* ── Loading ── */
 #loading {
@@ -1012,5 +1020,20 @@ async function init() {
 
 init();
 </script>
+
+<nav class="bottom-nav" aria-label="App navigation">
+  <a href="index.html" class="nav-tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="12" r="3"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="3" y1="10.5" x2="3" y2="13.5"/><line x1="21" y1="10.5" x2="21" y2="13.5"/></svg>
+    <span>Tracker</span>
+  </a>
+  <a href="progress.html" class="nav-tab nav-active-p">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="14" width="4" height="7" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="5" width="4" height="16" rx="1"/></svg>
+    <span>Progress</span>
+  </a>
+  <a href="settings.html" class="nav-tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="8" cy="6" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+    <span>Settings</span>
+  </a>
+</nav>
 </body>
 </html>
