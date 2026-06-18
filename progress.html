@@ -931,7 +931,7 @@ async function init() {
     S.vis = new Set(Object.keys(exReg));
 
     document.getElementById('loading').style.display = 'none';
-    document.getElementById('dashboard').style.display = '';
+    document.getElementById('dashboard').style.display = 'block';
 
     const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     document.getElementById('refresh-ts').textContent = `Updated ${now}`;
@@ -939,7 +939,7 @@ async function init() {
     renderAll();
   } catch (err) {
     document.getElementById('loading').style.display = 'none';
-    document.getElementById('error-box').style.display = '';
+    document.getElementById('error-box').style.display = 'block';
     document.getElementById('error-detail').textContent = err.message;
     console.error('Dashboard fetch error:', err);
   } finally {
