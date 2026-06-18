@@ -1,6 +1,7 @@
 {
-  "name": "Alex's Gym Tracker",
-  "short_name": "Gym",
+  "id": "/gym-tracker/",
+  "name": "Gym Tracker",
+  "short_name": "Tracker",
   "description": "Workout tracker and progress dashboard",
   "start_url": "/gym-tracker/",
   "scope": "/gym-tracker/",

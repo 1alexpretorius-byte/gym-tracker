@@ -1,0 +1,38 @@
+{
+  "_note": "These are the assumptions Claude uses when generating weekly training plans. To change a value, ask Claude Code or Cowork to update this file and the script will reflect it on the next Sunday run.",
+  "progressive_overload": {
+    "increase_trigger": "All sets hit target reps",
+    "hold_trigger": "Any set missed by more than 2 reps",
+    "reduce_trigger": "More than 20% of total reps missed across the session",
+    "increments_kg": {
+      "barbell": 2.5,
+      "dumbbell_per_hand": 1.0,
+      "cable": 2.5,
+      "machine": 2.5
+    }
+  },
+  "deload": {
+    "frequency_weeks": 4,
+    "protocol": "Every 4th week (3 on, 1 off)",
+    "weight_pct_of_current": 70,
+    "rep_increase_vs_normal": 2,
+    "set_reduction_vs_normal": 1
+  },
+  "phases": {
+    "ramp_up": { "weeks": "1–2" },
+    "building": { "weeks": "3–6" },
+    "peak": { "weeks": "7+" },
+    "_note": "Phase labels are passed to Claude as context and influence volume/intensity suggestions, not hard-coded numbers."
+  },
+  "log_context_sessions": 12,
+  "athlete_profile": {
+    "body_weight_kg": 73,
+    "program": "6-day PPL split",
+    "experience": "intermediate (~6 months lifting history)",
+    "equipment": "Full commercial gym"
+  },
+  "rest_seconds": {
+    "compound": { "min": 120, "max": 180 },
+    "isolation": { "min": 60, "max": 90 }
+  }
+}
