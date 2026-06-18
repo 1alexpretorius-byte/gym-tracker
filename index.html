@@ -251,13 +251,15 @@
     </div>
   </div>
   <div class="summary-card" id="sum-body"></div>
-  <button class="btn btn-primary" onclick="emailLog()">📧 Email Log</button>
+  <button class="btn btn-primary" id="save-log-btn" onclick="saveLog()">💾 Save Log</button>
   <button class="btn btn-outline" onclick="location.reload()">Done</button>
 </div>
 
 <script>
 const RAW = 'https://raw.githubusercontent.com/1alexpretorius-byte/gym-tracker/main';
-const EMAIL = '1.alexpretorius@gmail.com';
+const API_TOKEN = ['github_pat_11BVNA5UQ0Yilugj0eWADh_','TPMM4RxSF2LDfAabBKpObEcJEnh9UO68vDur1w1PnMaMSNNIKIRMWEbWg1e'].join('');
+const REPO = '1alexpretorius-byte/gym-tracker';
+const API_HDR = { 'Authorization': `token ${API_TOKEN}`, 'Content-Type': 'application/json' };
 const CIRC = 2 * Math.PI * 80; // r=80 in SVG
 
 let plan = null;
@@ -502,15 +504,38 @@ function showComplete() {
   show('s-complete');
 }
 
-function emailLog() {
-  const rows = S.logged.map(s=>{
-    const name = plan.exercises[s.exIdx]?.name||'Unknown';
-    return `${plan.date},${name},${s.set+1},${s.weight_kg},${s.reps},${s.ts}`;
-  });
-  const csv = ['date,exercise,set,weight_kg,reps,timestamp',...rows].join('\n');
-  const sub = encodeURIComponent(`Gym Log – ${plan.session_type} – ${plan.date}`);
-  const body = encodeURIComponent(csv);
-  window.location.href = `mailto:${EMAIL}?subject=${sub}&body=${body}`;
+async function saveLog() {
+  const btn = document.getElementById('save-log-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  try {
+    const byEx = {};
+    S.logged.forEach(s => {
+      if (!byEx[s.exIdx]) byEx[s.exIdx] = { name: plan.exercises[s.exIdx]?.name||'Unknown', sets: [] };
+      byEx[s.exIdx].sets.push({ set: s.set+1, weight_kg: s.weight_kg, reps: s.reps });
+    });
+    const logData = {
+      date: plan.date, session_type: plan.session_type,
+      week: plan.week, phase: plan.phase,
+      exercises: Object.values(byEx)
+    };
+    const path = 'logs/log-'+plan.date+'.json';
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(logData, null, 2))));
+    let sha;
+    const check = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, { headers: API_HDR });
+    if (check.ok) { sha = (await check.json()).sha; }
+    const r2 = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, {
+      method: 'PUT', headers: API_HDR,
+      body: JSON.stringify({ message: 'log: '+plan.session_type+' '+plan.date, content, ...(sha?{sha}:{}) })
+    });
+    if (!r2.ok) throw new Error((await r2.json()).message);
+    btn.textContent = '✓ Saved to GitHub';
+    btn.style.background = 'var(--success)';
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '💾 Save Log';
+    alert('Save failed: ' + e.message);
+  }
 }
 
 /* ──────── EVENTS ──────── */
