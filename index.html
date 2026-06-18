@@ -559,7 +559,7 @@ async function saveLog() {
   try {
     const byEx = {};
     S.logged.forEach(s => {
-      if (!byEx[s.exIdx]) byEx[s.exIdx] = { name: plan.exercises[s.exIdx]?.name||'Unknown', sets: [] };
+      if (!byEx[s.exIdx]) byEx[s.exIdx] = { name: plan.exercises[s.exIdx]?.name||'Unknown', equipment: plan.exercises[s.exIdx]?.equipment||null, sets: [] };
       byEx[s.exIdx].sets.push({ set: s.set+1, weight_kg: s.weight_kg, reps: s.reps });
     });
     const bwVal = parseFloat(document.getElementById('inp-bw').value) || null;
