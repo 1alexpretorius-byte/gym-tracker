@@ -1,7 +1,115 @@
 {
   "date": "2026-06-22",
-  "session_type": "Pull A",
+  "session_type": "Legs A",
   "week": 2,
   "phase": "Ramp-up",
-  "exercises": []
+  "body_weight_kg": 75.5,
+  "session_rpe": 8,
+  "exercises": [
+    {
+      "name": "Leg Press",
+      "equipment": "machine",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 80,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 120,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 120,
+          "reps": 14
+        }
+      ]
+    },
+    {
+      "name": "Romanian Deadlift",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 20,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 20,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 20,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "name": "Leg Extension",
+      "equipment": "machine",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 35,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_kg": 35,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 35,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "name": "Leg Curl",
+      "equipment": "machine",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 35,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 35,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 35,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "name": "Standing Calf Raise",
+      "equipment": "machine",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 45,
+          "reps": 20
+        },
+        {
+          "set": 2,
+          "weight_kg": 45,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 35,
+          "reps": 14
+        }
+      ]
+    }
+  ]
 }
