@@ -162,10 +162,58 @@ ${JSON.stringify(recentLogs, null, 2)}
   ]
 }
 
-## Rules
-- Keep the same exercises as in recent matching sessions. Do not add or remove exercises.
-- Populate "previous" for each exercise using the most recent log of the same session type.
+## Session design — A vs B must use meaningfully different exercises
+
+### Push A (horizontal press focus)
+- Lead with flat or low-incline barbell/dumbbell press (chest primary)
+- Include one overhead isolation (OHT cable extension or skull crushers)
+- Include one triceps pushdown variation
+- Include lateral raises
+- Do NOT lead with shoulder press
+
+### Push B (vertical/overhead press focus)
+- Lead with seated barbell or dumbbell overhead press (shoulder primary)
+- Include a chest fly variation (cable crossover, pec deck, or incline DB fly) — NOT another press
+- Include lateral raises (cable preferred for variety)
+- Include ONE triceps exercise only (dips, close-grip bench, or a variation not used in Push A that week)
+- Do NOT repeat flat bench press
+
+### Pull A (vertical pull focus)
+- Lead with lat pulldown (wide overhand grip)
+- Include seated cable row
+- Include face pull (rear delts / rotator cuff health — never skip)
+- Include two bicep variations (one supinating curl, one neutral/hammer)
+
+### Pull B (horizontal pull focus)
+- Lead with a row (bent-over barbell row, chest-supported row, or T-bar row)
+- Include single-arm DB row or cable row variation
+- Include rear delt fly (cable or pec deck reverse) — NOT face pull again
+- Include lat pulldown (underhand or neutral grip for variety)
+- Include ONE bicep exercise (choose a different variation to Pull A: preacher, incline, EZ-bar, or cable curl)
+
+### Legs A (quad focus)
+- Lead with leg press or hack squat
+- Include a hip-hinge movement (dumbbell RDL or stiff-leg deadlift)
+- Include leg extension (quad isolation)
+- Include leg curl (hamstring isolation)
+- Include a calf raise variation (standing preferred)
+
+### Legs B (posterior chain focus)
+- Lead with barbell RDL or Romanian deadlift (heavier hip-hinge as primary)
+- Include a unilateral leg movement (walking lunges, Bulgarian split squat, or step-ups)
+- Include leg curl
+- Include leg extension
+- Include a calf raise variation (seated preferred for soleus variety)
+
+## Exercise rotation rules
+- If an isolation exercise (curl, triceps, lateral raise, calf) appeared in the SAME session type last week, swap it for a different variation targeting the same muscle.
+- Never programme the same primary compound in both A and B of the same muscle group in the same week.
+- Prioritise exercises for which recent logs show good form signals (clean reps, no notes about failure). Deprioritise exercises where the athlete has been consistently missing reps.
+
+## Progressive overload and previous field
+- Populate "previous" for each exercise using the most recent log entry for that exercise by name.
   If no previous log exists for that exercise, set "previous": null.
+- Apply overload rules to each exercise independently based on its own log history.
 - target_reps array length must equal sets count.
 - rest_seconds: compound lifts 120–180 s, isolation 60–90 s.
 - notes: one short sentence. Be specific — mention grip, tempo, or a common error to avoid.
