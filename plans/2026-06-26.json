@@ -62,4 +62,31 @@
       "target_reps": [12, 12, 12],
       "target_weight_kg": 24,
       "rest_seconds": 90,
-      "notes": "24kg working weight. Full stretch at bottom is key for long head activatio
+      "notes": "24kg working weight. Full stretch at bottom is key for long head activation.",
+      "previous": {
+        "date": "2026-06-17",
+        "sets": [
+          {"weight_kg": 30, "reps": 8},
+          {"weight_kg": 22, "reps": 12}
+        ]
+      }
+    },
+    {
+      "name": "Triceps Pushdown",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [12, 12, 12],
+      "target_weight_kg": 36,
+      "rest_seconds": 75,
+      "notes": "Hold at 36kg. Elbows locked at sides, full extension at bottom.",
+      "previous": {
+        "date": "2026-06-17",
+        "sets": [
+          {"weight_kg": 36, "reps": 12},
+          {"weight_kg": 36, "reps": 12},
+          {"weight_kg": 36, "reps": 10}
+        ]
+      }
+    }
+  ]
+}

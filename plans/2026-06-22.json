@@ -1,60 +1,57 @@
 {
   "date": "2026-06-22",
-  "session_type": "Pull B",
+  "session_type": "Legs A",
   "week": 2,
   "phase": "Ramp-up",
   "exercises": [
     {
-      "name": "Bent-Over Barbell Row",
-      "equipment": "barbell",
+      "name": "Leg Press",
+      "equipment": "machine",
       "sets": 3,
-      "target_reps": [10, 10, 10],
-      "target_weight_kg": 50,
-      "rest_seconds": 120,
-      "notes": "Overhand grip, hinge to ~45°. Pull bar to lower chest, control the descent. Sub with machine row if preferred.",
+      "target_reps": [12, 12, 12],
+      "target_weight_kg": 80,
+      "rest_seconds": 150,
+      "notes": "Feet shoulder-width, mid-plate. Full depth — thighs past 90°. Do not lock knees at top.",
       "previous": null
     },
     {
-      "name": "Single Arm DB Row",
+      "name": "Romanian Deadlift",
       "equipment": "dumbbell",
       "sets": 3,
       "target_reps": [10, 10, 10],
       "target_weight_kg": 20,
-      "rest_seconds": 90,
-      "notes": "Brace on bench. Drive elbow up and back — not just up. Full stretch at bottom.",
+      "rest_seconds": 120,
+      "notes": "Hinge at hips, soft knee bend. Feel hamstring stretch before driving hips forward.",
       "previous": null
     },
     {
-      "name": "Lat Pulldown",
-      "equipment": "cable",
-      "sets": 3,
-      "target_reps": [12, 12, 12],
-      "target_weight_kg": 50,
-      "rest_seconds": 90,
-      "notes": "Neutral or underhand grip today for variety. Pull to upper chest.",
-      "previous": {
-        "date": "2026-06-18",
-        "sets": null
-      }
-    },
-    {
-      "name": "Rear Delt Fly",
-      "equipment": "cable",
+      "name": "Leg Extension",
+      "equipment": "machine",
       "sets": 3,
       "target_reps": [15, 15, 15],
-      "target_weight_kg": 10,
-      "rest_seconds": 75,
-      "notes": "Cables crossed, pull back and out. Or use pec deck in reverse. Squeeze rear delts.",
+      "target_weight_kg": 35,
+      "rest_seconds": 90,
+      "notes": "Full extension, hold 1 sec at top. No swinging.",
       "previous": null
     },
     {
-      "name": "Incline DB Curl",
-      "equipment": "dumbbell",
+      "name": "Leg Curl",
+      "equipment": "machine",
       "sets": 3,
       "target_reps": [12, 12, 12],
-      "target_weight_kg": 11,
-      "rest_seconds": 75,
-      "notes": "Incline bench, arm hangs at full stretch. Deep stretch — great for long head growth.",
+      "target_weight_kg": 35,
+      "rest_seconds": 90,
+      "notes": "Curl fully, control the eccentric (3 sec down).",
+      "previous": null
+    },
+    {
+      "name": "Standing Calf Raise",
+      "equipment": "machine",
+      "sets": 3,
+      "target_reps": [20, 20, 20],
+      "target_weight_kg": 60,
+      "rest_seconds": 60,
+      "notes": "Full range — deep stretch at bottom, full contraction at top. Slow eccentric.",
       "previous": null
     }
   ]
