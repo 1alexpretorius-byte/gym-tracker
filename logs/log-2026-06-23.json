@@ -1,7 +1,141 @@
 {
   "date": "2026-06-23",
-  "session_type": "Legs A",
+  "session_type": "Push A",
   "week": 2,
   "phase": "Ramp-up",
-  "exercises": []
+  "body_weight_kg": 75,
+  "session_rpe": 8,
+  "exercises": [
+    {
+      "name": "Flat Bench Press",
+      "equipment": "barbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 60,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 60,
+          "reps": 8
+        },
+        {
+          "set": 3,
+          "weight_kg": 60,
+          "reps": 8
+        },
+        {
+          "set": 4,
+          "weight_kg": 60,
+          "reps": 8
+        }
+      ]
+    },
+    {
+      "name": "Incline DB Press",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 14,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 14,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 14,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Seated DB Shoulder Press",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 10,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 12,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 12,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Lateral Raises",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 5,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_kg": 5,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 5,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "name": "Triceps Pushdown",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 36,
+          "reps": 9
+        },
+        {
+          "set": 2,
+          "weight_kg": 24,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 24,
+          "reps": 11
+        }
+      ]
+    },
+    {
+      "name": "Overhead Triceps Extension",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 24,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 24,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 24,
+          "reps": 12
+        }
+      ]
+    }
+  ]
 }
