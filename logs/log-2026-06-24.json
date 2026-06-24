@@ -1,7 +1,115 @@
 {
   "date": "2026-06-24",
-  "session_type": "Push A",
+  "session_type": "Pull A",
   "week": 2,
   "phase": "Ramp-up",
-  "exercises": []
+  "body_weight_kg": 75,
+  "session_rpe": 7,
+  "exercises": [
+    {
+      "name": "Lat Pulldown",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 65,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 65,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 65,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Seated Cable Row",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 60,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 60,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 60,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Face Pull",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 20,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_kg": 20,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 20,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "name": "DB Bicep Curl",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 10,
+          "reps": 9
+        },
+        {
+          "set": 2,
+          "weight_kg": 10,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 10,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Hammer Curl",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 8,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 8,
+          "reps": 12
+        },
+        {
+          "set": 3,
+          "weight_kg": 10,
+          "reps": 12
+        }
+      ]
+    }
+  ]
 }
