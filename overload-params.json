@@ -1,15 +1,16 @@
 {
-  "_note": "These are the assumptions Claude uses when generating weekly training plans. To change a value, ask Claude Code or Cowork to update this file and the script will reflect it on the next Sunday run.",
+  "_note": "Reference parameters for the plan generator. Progressive overload logic is computed in generate-plans.js. Update this file to change training parameters — settings.html reflects changes live.",
   "progressive_overload": {
-    "increase_trigger": "All sets hit target reps",
-    "hold_trigger": "Any set missed by more than 2 reps",
+    "increase_trigger": "All sets hit target reps (none missed by more than 2)",
+    "hold_trigger": "Any set missed target reps by more than 2",
     "reduce_trigger": "More than 20% of total reps missed across the session",
     "increments_kg": {
       "barbell": 2.5,
       "dumbbell_per_hand": 1.0,
       "cable": 2.5,
       "machine": 2.5
-    }
+    },
+    "_note": "Dumbbell increment is per hand. Progression is computed per exercise from actual log vs plan targets."
   },
   "deload": {
     "frequency_weeks": 4,
@@ -19,20 +20,29 @@
     "set_reduction_vs_normal": 1
   },
   "phases": {
-    "ramp_up": { "weeks": "1–2" },
-    "building": { "weeks": "3–6" },
-    "peak": { "weeks": "7+" },
-    "_note": "Phase labels are passed to Claude as context and influence volume/intensity suggestions, not hard-coded numbers."
+    "ramp_up": { "weeks": "1–2", "intent": "Learn movements, establish baselines, keep RPE ≤8" },
+    "building": { "weeks": "3–6", "intent": "Progressive overload, RPE 8–9, volume accumulation" },
+    "peak": { "weeks": "7+", "intent": "Intensity, RPE 9–10, reduce isolation volume if needed" }
   },
   "log_context_sessions": 12,
   "athlete_profile": {
-    "body_weight_kg": 73,
+    "body_weight_kg": 75,
     "program": "6-day PPL split",
-    "experience": "intermediate (~6 months lifting history)",
-    "equipment": "Full commercial gym"
+    "experience": "Intermediate (~20 months lifting)",
+    "equipment": "Full commercial gym",
+    "goal": "Hypertrophy + lean bulk (+0.5kg/month)"
   },
   "rest_seconds": {
     "compound": { "min": 120, "max": 180 },
     "isolation": { "min": 60, "max": 90 }
+  },
+  "session_design": {
+    "_note": "Session templates are enforced in generate-plans.js SESSION_TEMPLATES. This is a human-readable summary.",
+    "Push A": "Flat Bench Press lead → Incline press → Shoulder press → Lateral raises → 2x triceps (pushdown + overhead)",
+    "Push B": "Overhead press lead → Chest FLY (not press) → Lateral raises (cable) → 1x triceps DIFFERENT from Push A",
+    "Pull A": "Lat pulldown (overhand) → Cable row → Face pull (required) → Supinating curl → Hammer curl",
+    "Pull B": "Barbell row lead → Unilateral row → Lat pulldown (underhand/neutral) → Rear delt fly → 1x bicep DIFFERENT from Pull A",
+    "Legs A": "SQUAT pattern lead (not leg press) → Dumbbell RDL → Leg extension → Leg curl → Standing calf raise",
+    "Legs B": "Barbell RDL lead → Unilateral leg → Leg curl → Leg extension → Seated calf raise"
   }
 }
