@@ -66,6 +66,11 @@
     .pbar { height: 3px; background: var(--surface3); border-radius: 99px; margin-top: 10px; overflow: hidden; }
     .pfill { height: 100%; background: var(--primary); border-radius: 99px; transition: width .4s ease; }
 
+    /* ── ROLLOVER BANNER ── */
+    .rollover-banner { margin: 12px 14px 0; background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); border-radius: var(--r-sm); padding: 10px 14px; }
+    .rb-label { font-size: 11px; font-weight: 700; color: var(--warning); text-transform: uppercase; letter-spacing: .08em; }
+    .rb-detail { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
     /* ── OVERVIEW ── */
     #s-overview { padding-bottom: 160px; }
     .sec-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); padding: 18px 18px 8px; }
@@ -174,7 +179,7 @@
 <!-- LOADING -->
 <div class="screen active" id="s-loading">
   <div class="spinner"></div>
-  <p style="color:var(--muted);font-size:14px">Loading today's plan…</p>
+  <p style="color:var(--muted);font-size:14px">Loading session…</p>
 </div>
 
 <!-- NO PLAN -->
@@ -196,7 +201,11 @@
       </div>
     </div>
   </div>
-  <div class="sec-label">Today's Exercises</div>
+  <div id="rollover-banner" style="display:none" class="rollover-banner">
+    <div class="rb-label">⏭ Catch-up session</div>
+    <div class="rb-detail" id="rb-detail"></div>
+  </div>
+  <div class="sec-label" id="sec-exercises-label">Today's Exercises</div>
   <div id="ex-list"></div>
   <div class="pin-bottom">
     <button class="btn btn-primary" onclick="startSession()">Begin Session →</button>
@@ -299,6 +308,7 @@ const API_HDR = { 'Authorization': `token ${API_TOKEN}`, 'Content-Type': 'applic
 const CIRC = 2 * Math.PI * 80; // r=80 in SVG
 
 let plan = null;
+let rolloverInfo = null;
 let S = {
   exIdx: 0,
   logged: [],          // {exIdx, set, weight_kg, reps, ts}
@@ -323,13 +333,13 @@ function show(id) {
   document.getElementById(id).classList.add('active');
 }
 function save() {
-  localStorage.setItem('sess_'+today(), JSON.stringify({
+  localStorage.setItem('sess_'+(plan?.date||today()), JSON.stringify({
     logged: S.logged, done: [...S.done], exIdx: S.exIdx
   }));
 }
 function load() {
   try {
-    const d = JSON.parse(localStorage.getItem('sess_'+today())||'null');
+    const d = JSON.parse(localStorage.getItem('sess_'+(plan?.date||today()))||'null');
     if (d) { S.logged = d.logged||[]; S.done = new Set(d.done||[]); S.exIdx = d.exIdx||0; }
   } catch(e){}
 }
@@ -338,15 +348,52 @@ function weightUnit(eq) { return eq==='dumbbell'?' kg/hand':' kg'; }
 
 /* ──────── INIT ──────── */
 async function init() {
-  load();
   try {
-    const r = await fetch(`${RAW}/plans/${today()}.json?t=${Date.now()}`);
-    if (!r.ok) throw new Error();
-    plan = await r.json();
+    const { plan: p, isRollover, pendingCount } = await findActiveSession();
+    if (!p) { show('s-no-plan'); return; }
+    plan = p;
+    rolloverInfo = isRollover ? { pendingCount } : null;
+    load();
     showOverview();
-  } catch {
+  } catch(e) {
     show('s-no-plan');
   }
+}
+
+async function findActiveSession() {
+  // Build last 7 calendar days oldest-first (not including today)
+  const pastDates = [];
+  for (let i = 7; i >= 1; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    pastDates.push(`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`);
+  }
+
+  // Check all past dates in parallel: plan exists AND log is missing/empty = skipped
+  const results = await Promise.all(pastDates.map(async date => {
+    const [planResp, logResp] = await Promise.all([
+      fetch(`${RAW}/plans/${date}.json?t=${Date.now()}`),
+      fetch(`${RAW}/logs/log-${date}.json?t=${Date.now()}`)
+    ]);
+    if (!planResp.ok) return null; // rest day — no plan
+    const planData = await planResp.json();
+    if (logResp.ok) {
+      const logData = await logResp.json();
+      if (logData.exercises && logData.exercises.length > 0) return null; // completed
+    }
+    return planData; // plan exists, no complete log = skipped
+  }));
+
+  const skipped = results.filter(Boolean); // already oldest-first
+
+  if (skipped.length > 0) {
+    return { plan: skipped[0], isRollover: true, pendingCount: skipped.length };
+  }
+
+  // No skips — load today's plan
+  const r = await fetch(`${RAW}/plans/${today()}.json?t=${Date.now()}`);
+  if (!r.ok) return { plan: null, isRollover: false, pendingCount: 0 };
+  return { plan: await r.json(), isRollover: false, pendingCount: 0 };
 }
 
 /* ──────── OVERVIEW ──────── */
@@ -354,6 +401,19 @@ function showOverview() {
   document.getElementById('ov-badge').textContent = plan.session_type;
   document.getElementById('ov-date').textContent = fmtDate(plan.date);
   document.getElementById('ov-meta').textContent = `Week ${plan.week} · ${plan.phase}`;
+
+  const banner = document.getElementById('rollover-banner');
+  const label = document.getElementById('sec-exercises-label');
+  if (rolloverInfo) {
+    const extra = rolloverInfo.pendingCount > 1 ? ` · ${rolloverInfo.pendingCount} sessions pending` : '';
+    document.getElementById('rb-detail').textContent =
+      `${plan.session_type} from ${fmtDate(plan.date)}${extra}`;
+    banner.style.display = 'block';
+    label.textContent = 'Catch-up Exercises';
+  } else {
+    banner.style.display = 'none';
+    label.textContent = "Today's Exercises";
+  }
 
   document.getElementById('ex-list').innerHTML = plan.exercises.map((ex,i)=>{
     const done = S.done.has(i);
@@ -559,7 +619,7 @@ function showComplete() {
     </div>`;
   }).join('');
 
-  localStorage.removeItem('sess_'+today());
+  localStorage.removeItem('sess_'+(plan?.date||today()));
   show('s-complete');
 }
 
