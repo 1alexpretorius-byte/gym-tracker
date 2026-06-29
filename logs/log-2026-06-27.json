@@ -3,5 +3,6 @@
   "session_type": "Push B",
   "week": 2,
   "phase": "Ramp-up",
+  "skipped": true,
   "exercises": []
 }

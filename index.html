@@ -380,6 +380,7 @@ async function findActiveSession() {
     if (logResp.ok) {
       const logData = await logResp.json();
       if (logData.exercises && logData.exercises.length > 0) return null; // completed
+      if (logData.skipped === true) return null; // intentionally skipped — don't roll over
     }
     return planData; // plan exists, no complete log = skipped
   }));

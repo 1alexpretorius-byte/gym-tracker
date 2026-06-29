@@ -1,0 +1,157 @@
+{
+  "date": "2026-07-01",
+  "session_type": "Pull A",
+  "week": 3,
+  "phase": "Building",
+  "exercises": [
+    {
+      "name": "Lat Pulldown",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [
+        10,
+        10,
+        10
+      ],
+      "target_weight_kg": 67.5,
+      "rest_seconds": 150,
+      "notes": "Wide overhand grip. Pull to upper chest, elbows drive down and back. Lean slightly back.",
+      "previous": {
+        "date": "2026-06-24",
+        "sets": [
+          {
+            "weight_kg": 65,
+            "reps": 10
+          },
+          {
+            "weight_kg": 65,
+            "reps": 10
+          },
+          {
+            "weight_kg": 65,
+            "reps": 10
+          }
+        ]
+      }
+    },
+    {
+      "name": "Seated Cable Row",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [
+        12,
+        12,
+        12
+      ],
+      "target_weight_kg": 62.5,
+      "rest_seconds": 120,
+      "notes": "Neutral grip. Pull to lower chest, squeeze shoulder blades. Stay upright.",
+      "previous": {
+        "date": "2026-06-24",
+        "sets": [
+          {
+            "weight_kg": 60,
+            "reps": 10
+          },
+          {
+            "weight_kg": 60,
+            "reps": 10
+          },
+          {
+            "weight_kg": 60,
+            "reps": 10
+          }
+        ]
+      }
+    },
+    {
+      "name": "Face Pull",
+      "equipment": "cable",
+      "sets": 3,
+      "target_reps": [
+        15,
+        15,
+        15
+      ],
+      "target_weight_kg": 22.5,
+      "rest_seconds": 60,
+      "notes": "Rope at forehead height. Pull to face, elbows high and wide. Rear delts and external rotation.",
+      "previous": {
+        "date": "2026-06-24",
+        "sets": [
+          {
+            "weight_kg": 20,
+            "reps": 15
+          },
+          {
+            "weight_kg": 20,
+            "reps": 15
+          },
+          {
+            "weight_kg": 20,
+            "reps": 15
+          }
+        ]
+      }
+    },
+    {
+      "name": "DB Bicep Curl",
+      "equipment": "dumbbell",
+      "sets": 3,
+      "target_reps": [
+        10,
+        10,
+        10
+      ],
+      "target_weight_kg": 11,
+      "rest_seconds": 75,
+      "notes": "Supinate fully at top. No elbow swing. Slow 3s eccentric. Per-hand weight.",
+      "previous": {
+        "date": "2026-06-24",
+        "sets": [
+          {
+            "weight_kg": 10,
+            "reps": 9
+          },
+          {
+            "weight_kg": 10,
+            "reps": 10
+          },
+          {
+            "weight_kg": 10,
+            "reps": 10
+          }
+        ]
+      }
+    },
+    {
+      "name": "Hammer Curl",
+      "equipment": "dumbbell",
+      "sets": 2,
+      "target_reps": [
+        12,
+        12
+      ],
+      "target_weight_kg": 10,
+      "rest_seconds": 60,
+      "notes": "Neutral grip throughout. Targets brachialis. Keep upper arms stationary. Per-hand weight.",
+      "previous": {
+        "date": "2026-06-24",
+        "sets": [
+          {
+            "weight_kg": 8,
+            "reps": 12
+          },
+          {
+            "weight_kg": 8,
+            "reps": 12
+          },
+          {
+            "weight_kg": 10,
+            "reps": 12
+          }
+        ]
+      }
+    }
+  ]
+}
