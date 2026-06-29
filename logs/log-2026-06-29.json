@@ -1,0 +1,120 @@
+{
+  "date": "2026-06-29",
+  "session_type": "Pull B",
+  "week": 3,
+  "phase": "Building",
+  "body_weight_kg": 76,
+  "session_rpe": 8,
+  "exercises": [
+    {
+      "name": "Bent-Over Barbell Row",
+      "equipment": "barbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 50,
+          "reps": 8
+        },
+        {
+          "set": 2,
+          "weight_kg": 50,
+          "reps": 8
+        },
+        {
+          "set": 3,
+          "weight_kg": 50,
+          "reps": 8
+        },
+        {
+          "set": 4,
+          "weight_kg": 50,
+          "reps": 8
+        }
+      ]
+    },
+    {
+      "name": "Single Arm DB Row",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 22,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 22,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 22,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Underhand Lat Pulldown",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 70,
+          "reps": 10
+        },
+        {
+          "set": 2,
+          "weight_kg": 70,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 70,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "Rear Delt Fly",
+      "equipment": "cable",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 5,
+          "reps": 12
+        },
+        {
+          "set": 2,
+          "weight_kg": 5,
+          "reps": 15
+        },
+        {
+          "set": 3,
+          "weight_kg": 5,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "name": "Incline DB Curl",
+      "equipment": "dumbbell",
+      "sets": [
+        {
+          "set": 1,
+          "weight_kg": 7.5,
+          "reps": 15
+        },
+        {
+          "set": 2,
+          "weight_kg": 10,
+          "reps": 10
+        },
+        {
+          "set": 3,
+          "weight_kg": 10,
+          "reps": 15
+        }
+      ]
+    }
+  ]
+}
