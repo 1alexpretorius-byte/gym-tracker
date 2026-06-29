@@ -806,12 +806,12 @@ function renderStr() {
       data: actual,
       borderColor: meta.clr,
       backgroundColor: meta.clr + '18',
-      borderWidth: 2.5,
-      pointRadius: actual.map(v => v != null ? 5 : 0),
-      pointHoverRadius: 7,
+      borderWidth: 2,
+      pointRadius: actual.map(v => v != null ? 3 : 0),
+      pointHoverRadius: 5,
       pointBackgroundColor: meta.clr,
       tension: 0.4,
-      spanGaps: false,
+      spanGaps: true,
     });
 
     if (S.proj && S.metric !== 'vol' && meta.proj) {
